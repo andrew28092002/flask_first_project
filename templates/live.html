@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{{ url_for('index') }}" class="btn btn-warning home">На главную</a>
+    <a href="{{ url_for('live') }}" class="btn btn-info refresh">Начать новую жизнь</a>
+    {% block app_content %}
+
+        <table class="world">
+            {% for i in range( new_life | length ) %}
+                <tr>
+                    {% for j in range( new_life[0] | length ) %}
+                        {% if new_life[i][j] == 1 %}
+                            <td class="cell living-cell"></td>
+                        {% else %}
+                            <td class="cell"></td>
+                        {%endif%}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endblock %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>setInterval(() => window.location.reload(), 1000)</script>
+{% endblock %}
+
